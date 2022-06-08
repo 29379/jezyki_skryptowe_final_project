@@ -1,6 +1,6 @@
 from django.db import models
-from django.utils import timezone
 from datetime import date, datetime
+#   from django.contrib.auth.models import User #   maybe at the end develop this????
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -15,11 +15,17 @@ class Data(models.Model):
     release_year = models.IntegerField(validators=[
         MaxValueValidator(date.today().year),
         MinValueValidator(1895),
-    ])
-    directors_and_actors = models.CharField(max_length=100)
+    ], blank=True)
+    directors_and_actors = models.CharField(max_length=100, blank=True)
     user_rating = models.DecimalField(max_digits=5, decimal_places=2,
                                       validators=[
                                           MaxValueValidator(10),
                                           MinValueValidator(0),
-                                      ])
-    poster = models.ImageField(upload_to=upload_to)
+                                      ], default=5.0)
+    poster = models.ImageField(upload_to=upload_to, blank=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['title']

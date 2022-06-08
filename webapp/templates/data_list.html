@@ -1,0 +1,13 @@
+<h1>Movies</h1>
+<table>
+    <tr>
+        <th>Items</th>
+    </tr>
+    {% for movie in movies %}
+    <tr>
+        <td>{{movie.title}}</td>
+    </tr>
+    {% empty %}
+    <h3>The database is empty</h3>
+    {% endfor %}
+</table>
