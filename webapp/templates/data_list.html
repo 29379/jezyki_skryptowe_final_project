@@ -1,11 +1,19 @@
 <h1>Movies</h1>
+
 <table>
     <tr>
+        <th><a href="{% url 'movie_create' %}">     Add</a> </th>
         <th>Items</th>
+        <th></th>
+        <th></th>
+        <th></th>
     </tr>
     {% for movie in movies %}
     <tr>
         <td>{{movie.title}}</td>
+        <td><a href="{% url 'movie' movie.pk %}">View</a></td>
+        <td><a href="{% url 'movie_update' movie.pk %}">Edit</a></td>
+        <td><a href="{% url 'movie_delete' movie.pk %}">Delete</a></td>
     </tr>
     {% empty %}
     <h3>The database is empty</h3>

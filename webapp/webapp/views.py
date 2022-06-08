@@ -14,8 +14,8 @@ class MovieListView(ListView):
 
 class MovieDetailView(DetailView):
     model = Data
-    template_name = 'data_get.html'
-    context_object_name = 'movies'
+    template_name = 'data_detail.html'
+    context_object_name = 'movie'
 
 
 class MovieCreateView(CreateView):
@@ -24,7 +24,7 @@ class MovieCreateView(CreateView):
     fields = ['title', 'release_year', 'directors_and_actors',
               'user_rating', 'poster']
     success_url = reverse_lazy('movies')
-    context_object_name = 'movies'
+    context_object_name = 'movie'
 
 
 class MovieUpdateView(UpdateView):
@@ -33,14 +33,14 @@ class MovieUpdateView(UpdateView):
     fields = ['title', 'release_year', 'directors_and_actors',
               'user_rating', 'poster']
     success_url = reverse_lazy('movies')
-    context_object_name = 'movies'
+    context_object_name = 'movie'
 
 
 class MovieDeleteView(DeleteView):
     model = Data
     template_name = 'data_delete.html'
     context_object_name = 'movies'
-    success_url = reverse_lazy('movies')
+    success_url = reverse_lazy('movie')
 
 
 def test(request):
