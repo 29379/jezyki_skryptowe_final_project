@@ -25,7 +25,8 @@ class Data(models.Model):
     poster = models.ImageField(upload_to=upload_to, blank=True)
 
     def __str__(self):
-        return self.title
+        return str(self.title) + '  |  ' + str(self.release_year)\
+               + '  |  ' + str(self.directors_and_actors) + '  |  ' + str(self.user_rating)
 
     class Meta:
         ordering = ['title']

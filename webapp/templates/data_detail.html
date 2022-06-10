@@ -1,1 +1,7 @@
+{% extends 'main.html' %}
+{% block content %}
+
 <h1>Movie: {{movie}}</h1>
+<a href="{% url 'movies' %}">   Go back</a>
+
+{% endblock content %}

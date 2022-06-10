@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <title>Movies</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,300&display=swap" rel="stylesheet">
+
+        <style>
+            body{
+                background-color: darkseagreen;
+                font-family: 'PT Sans', sans-serif;
+                padding-top: 25px;
+            }
+
+            h1, h2, h3, h4, h5, h6{
+                font-family: 'Kanit', sans-serif;
+            }
+
+            a, p{
+                color: darkslategray;
+                text-shadow: 2px 2px 4px darkslate gray;
+                padding-right: 10px;
+            }
+
+            .container{
+                max-width: 600px;
+                margin: auto;
+                text-shadow: 2px 2px 4px grey;
+                background: linear-gradient(90deg, #8FBC8F 0%, #66A366 59%, #66A366 100%);
+            }
+
+            .movie-wrapper{
+                display: flex;
+                align-items: left;
+                justify-content: safe center;
+
+            }
+
+            .search-wrapper{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .page-title-wrapper{}
+
+        </style>
+
+    </head>
+
+    <body>
+        <div class="container">
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+    </body>
+</html>

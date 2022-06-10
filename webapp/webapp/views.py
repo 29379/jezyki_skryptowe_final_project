@@ -11,6 +11,16 @@ class MovieListView(ListView):
     template_name = 'data_list.html'
     context_object_name = 'movies'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        search_input = self.request.GET.get('search_area') or ''
+        if search_input is not '':
+            context['movies'] = context['movies'].filter(
+                title__icontains=search_input
+            )
+        context['search_input'] = search_input
+        return context
+
 
 class MovieDetailView(DetailView):
     model = Data
@@ -40,7 +50,7 @@ class MovieDeleteView(DeleteView):
     model = Data
     template_name = 'data_delete.html'
     context_object_name = 'movies'
-    success_url = reverse_lazy('movie')
+    success_url = reverse_lazy('movies')
 
 
 def test(request):
