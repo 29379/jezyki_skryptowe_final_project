@@ -1,9 +1,15 @@
+import json
+
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, DeleteView
 from .models import Data
 from django.http import HttpResponse
 from django.urls import reverse_lazy
+from pathlib import Path
 from django.shortcuts import render
 from django.db.models import F
+
+#   webscraping_folder = Path("../../.webscraping/")
+#   imdb_file = webscraping_folder / "imdb.json"
 
 
 class MovieListView(ListView):
@@ -35,7 +41,10 @@ class MovieCreateView(CreateView):
               'user_rating', 'poster']
     success_url = reverse_lazy('movies')
     context_object_name = 'movie'
-
+    """with open(imdb_file) as f:
+        contents = json.load(f)
+        Data.objects.create(**contents)
+"""
 
 class MovieUpdateView(UpdateView):
     model = Data

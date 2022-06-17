@@ -1,7 +1,15 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<h1>Movie: {{movie}}</h1>
-<a href="{% url 'movies' %}">   Go back</a>
+<div class="page-title-wrapper">
+    <h1>{{movie.title}}</h1>
+</div>
+
+<div class="movie-wrapper">
+    <a href="{{movie.poster}}">{{movie.poster}}
+        <img src="{{movie.poster}}" alt="Image not found" style="width:100%">
+    </a>
+    <td class="rating" align="left">{{movie.user_rating}}</td>
+</div>
 
 {% endblock content %}

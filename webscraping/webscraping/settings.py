@@ -12,14 +12,15 @@ import sys, os
 
 #   ??? HOW ???
 
-#   sys.path.insert(0, "/home/Kuba/Desktop/jezyki_skryptowe_final_project/webapp/")
-#   from ../.webapp.webapp.settings import MEDIA_ROOT   #   completely wrong
+#   sys.path.insert(0, "/home/Kuba/Desktop/tmp/jezyki_skryptowe_final_project/webapp/webapp")
+#   from ../.webapp.webapp.settings import MEDIA_ROOT   #   Unresolved reference 'webapp' / Statement seems to have no effect / No module named 'MEDIA_ROOT'
 #   from webapp.webapp.settings import MEDIA_ROOT   #   no module named 'webapp.webapp'
+#   from settings import MEDIA_ROOT #   Cannot find reference 'MEDIA_ROOT' in 'settings.py'
 
-#   sys.path.insert(0, "/home/Kuba/Desktop/jezyki_skryptowe_final_project/webapp/webapp/")
-#   from ../.webapp.webapp.settings import MEDIA_ROOT   #   completely wrong
+sys.path.insert(0, '/home/Kuba/Desktop/tmp/jezyki_skryptowe_final_project/webapp/webapp/')
+#   from ../.webapp.webapp.settings import MEDIA_ROOT   #   Unresolved reference 'webapp' / Statement seems to have no effect / No module named 'MEDIA_ROOT'
 #   from webapp.webapp.settings import MEDIA_ROOT   #   no module named 'webapp'
-
+from settings import MEDIA_ROOT  # Cannot find reference 'MEDIA_ROOT' in 'settings.py', ale niby sie odpala w terminalu webscraping i chodzi
 
 #   ??? HOW ???
 
@@ -106,5 +107,5 @@ ITEM_PIPELINES = {
 
 FEED_FORMAT = "json"
 FEED_URI = "imdb.json"
-#   IMAGES = MEDIA_ROOT
+IMAGES = MEDIA_ROOT
 #   IMAGES_STORE = '/images/'
