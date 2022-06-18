@@ -3,10 +3,12 @@ from datetime import date, datetime
 #   from django.contrib.auth.models import User #   maybe at the end develop this????
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+from .settings import MEDIA_ROOT
 
-def upload_to(instance, file_name):
+
+"""def upload_to(instance, file_name):
     formatted_date = datetime.now().strftime("%d-%m-%Y")
-    return f"{formatted_date}/{file_name}"
+    return f"{formatted_date}/{file_name}"""
 
 
 class Data(models.Model):
@@ -22,7 +24,7 @@ class Data(models.Model):
                                           MaxValueValidator(10),
                                           MinValueValidator(0),
                                       ], default=5.0)
-    poster = models.ImageField(upload_to=upload_to, blank=True)
+    poster = models.ImageField(upload_to='', blank=True)
 
     def __str__(self):
         return str(self.title)

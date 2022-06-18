@@ -2,16 +2,18 @@
 {% block content %}
 
 <div class="page-title-wrapper">
-    <h1>
+    <h1 style="text-align: center">
         {{movie.title}}
     </h1>
 </div>
-<input type=button value="Previous Page" onClick="javascript:history.go(-1);">
+
 <div class="movie-wrapper">
-    <a href="{{movie.poster}}">{{movie.poster}}
-        <img src="{{movie.poster}}" alt="Image not found" style="width:100%">
-    </a>
+    <div class="image-wrapper" style="text-align: left">
+        <img src="{{movie.poster.url}}" alt="Image not found" style="float: center">
+    </div>
     <td class="rating" align="left">{{movie.user_rating}}</td>
 </div>
+
+<input type=button value="Previous Page" onClick="javascript:history.go(-1)">
 
 {% endblock content %}
