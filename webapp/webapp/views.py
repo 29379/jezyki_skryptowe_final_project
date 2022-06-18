@@ -1,4 +1,4 @@
-import json
+import json, sys, os
 
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, DeleteView
 from .models import Data
@@ -8,8 +8,23 @@ from pathlib import Path
 from django.shortcuts import render
 from django.db.models import F
 
-#   webscraping_folder = Path("../../.webscraping/")
-#   imdb_file = webscraping_folder / "imdb.json"
+
+PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
+imdb_file = os.path.join(PROJECT_DIR, 'webscraping/imdb.json')
+
+
+class MovieCreateView(CreateView):
+    model = Data
+    template_name = 'data_create.html'
+    fields = ['title', 'release_year', 'directors_and_actors',
+              'user_rating', 'poster']
+    success_url = reverse_lazy('movies')
+    context_object_name = 'movie'
+    with open(imdb_file) as f:
+        contents = json.load(f)
+        for elem in contents:
+            elem['release_year'] = elem['release_year'].strip('()')
+            Data.objects.create(**elem)
 
 
 class MovieListView(ListView):
@@ -20,7 +35,7 @@ class MovieListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         search_input = self.request.GET.get('search_area') or ''
-        if search_input is not '':
+        if search_input != '':
             context['movies'] = context['movies'].filter(
                 title__icontains=search_input
             )
@@ -39,18 +54,6 @@ def movie_detail_view(request, pk):
     else:
         return Http404("Image not found")
 
-
-class MovieCreateView(CreateView):
-    model = Data
-    template_name = 'data_create.html'
-    fields = ['title', 'release_year', 'directors_and_actors',
-              'user_rating', 'poster']
-    success_url = reverse_lazy('movies')
-    context_object_name = 'movie'
-    """with open(imdb_file) as f:
-        contents = json.load(f)
-        Data.objects.create(**contents)
-"""
 
 class MovieUpdateView(UpdateView):
     model = Data
