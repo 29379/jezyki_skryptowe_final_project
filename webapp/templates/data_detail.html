@@ -2,9 +2,11 @@
 {% block content %}
 
 <div class="page-title-wrapper">
-    <h1>{{movie.title}}</h1>
+    <h1>
+        {{movie.title}}
+    </h1>
 </div>
-
+<input type=button value="Previous Page" onClick="javascript:history.go(-1);">
 <div class="movie-wrapper">
     <a href="{{movie.poster}}">{{movie.poster}}
         <img src="{{movie.poster}}" alt="Image not found" style="width:100%">
