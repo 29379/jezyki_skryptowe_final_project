@@ -2,7 +2,7 @@ import json
 
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, DeleteView
 from .models import Data
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.urls import reverse_lazy
 from pathlib import Path
 from django.shortcuts import render
@@ -28,10 +28,16 @@ class MovieListView(ListView):
         return context
 
 
-class MovieDetailView(DetailView):
+"""class MovieDetailView(DetailView):
     model = Data
     template_name = 'data_detail.html'
-    context_object_name = 'movie'
+    context_object_name = 'movie'"""
+def movie_detail_view(request, pk):
+    movie = Data.objects.get(pk=pk)
+    if movie is not None:
+        return render(request, 'data_detail.html', {'movie': movie})
+    else:
+        return Http404("Image not found")
 
 
 class MovieCreateView(CreateView):
@@ -67,7 +73,7 @@ def test(request):
 
 
 movie_list_view = MovieListView.as_view()
-movie_detail_view = MovieDetailView.as_view()
+#   movie_detail_view = MovieDetailView.as_view()
 movie_create_view = MovieCreateView.as_view()
 movie_update_view = MovieUpdateView.as_view()
 movie_delete_view = MovieDeleteView.as_view()
