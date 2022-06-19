@@ -7,13 +7,41 @@
     </h1>
 </div>
 
-<a href="{% url 'movies' %}">   Go back</a>
+<table class="my-table">
+    <colgroup>
+        <col class="poster-col"/>
+        <col class="dir-act-col"/>
+        <col class="year-col"/>
+        <col class="rating-col"/>
+    </colgroup>
 
-<div class="movie-wrapper">
-    <div class="image-wrapper" style="text-align: left">
-        <img src="{{movie.poster.url}}" alt="Image not found" style="float: center">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Directors and actors</th>
+            <th>Release year</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+
+    <tbody class="movie-wrapper">
+        <tr>
+            <td class="poster-col-content">
+                <img src="{{movie.poster}}" alt="Image not found" style="float: center">
+            </td>
+            <td class="dir-act-col-content">
+                {{movie.directors_and_actors}}
+            </td>
+            <td class="year-col-content">
+                {{movie.release_year}}
+            </td>
+            <td class="rating-col-content">
+                {{movie.user_rating}}
+            </td>
+        </tr>
     </div>
-    <td class="rating" align="left">{{movie.user_rating}}</td>
-</div>
+</table>
+
+<a href="{% url 'movies' %}">   Go back</a>
 
 {% endblock content %}

@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from pathlib import Path
 from django.shortcuts import render
 from django.db.models import Avg, Sum
+import logging
 
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
