@@ -7,13 +7,13 @@
     </h1>
 </div>
 
+<a href="{% url 'movies' %}">   Go back</a>
+
 <div class="movie-wrapper">
     <div class="image-wrapper" style="text-align: left">
         <img src="{{movie.poster.url}}" alt="Image not found" style="float: center">
     </div>
     <td class="rating" align="left">{{movie.user_rating}}</td>
 </div>
-
-<input type=button value="Previous Page" onClick="javascript:history.go(-1)">
 
 {% endblock content %}

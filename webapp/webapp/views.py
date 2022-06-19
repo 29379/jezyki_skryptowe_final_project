@@ -20,7 +20,6 @@ def movie_create_view(request):
             elem['release_year'] = elem['release_year'].strip('()')
             Data.objects.create(**elem)
     #   Data.objects.values('title').annotate(total=Sum('user_rating')).values('title', 'user_rating', 'total')
-    #   'annotate' approach did not work as expected - usage of the for loop is slow, but effective
     for row in Data.objects.all().reverse():
         if Data.objects.filter(title=row.title).count() > 1:
             row.delete()

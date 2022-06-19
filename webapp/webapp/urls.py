@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .settings import MEDIA_URL, MEDIA_ROOT
+#   from .settings import MEDIA_URL, MEDIA_ROOT
 from django.conf.urls.static import static
 from . import views
 
@@ -11,4 +11,4 @@ urlpatterns = [
     path('movie_create/', views.movie_create_view, name='movie_create'),
     path('movie_update/<int:pk>/', views.movie_update_view, name='movie_update'),
     path('movie_delete/', views.movie_delete_view, name='movie_delete'),
-] + static(MEDIA_URL, document_root=MEDIA_ROOT)
+]#  + static(MEDIA_URL, document_root=MEDIA_ROOT)

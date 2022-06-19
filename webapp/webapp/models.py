@@ -1,9 +1,6 @@
 from django.db import models
 from datetime import date, datetime
-#   from django.contrib.auth.models import User #   maybe at the end develop this????
 from django.core.validators import MaxValueValidator, MinValueValidator
-
-from .settings import MEDIA_ROOT
 
 
 """def upload_to(instance, file_name):
