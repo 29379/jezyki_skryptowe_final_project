@@ -5,12 +5,16 @@
     <h1>Movies</h1>
 </div>
 
+
+
 <div class="connections-wrapper">
     <a href="{% url 'movie_create' %}">   Scrape data from "imdb.com"</a>
     <a href="{% url 'movie_delete' %}">   Delete</a>
+    <a href="{% url 'movie_create' %}">   Run script</a>
     <text>Database size: {{count}}</text>
     <p></p>
 </div>
+
 <div class="search-wrapper">
     <form method="GET">
         <input type="text" name="search_area" value="{{search_input}}" size="64">

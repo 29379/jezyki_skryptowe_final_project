@@ -11,4 +11,5 @@ urlpatterns = [
     path('movie_create/', views.movie_create_view, name='movie_create'),
     path('movie_update/<int:pk>/', views.movie_update_view, name='movie_update'),
     path('movie_delete/', views.movie_delete_view, name='movie_delete'),
-]#  + static(MEDIA_URL, document_root=MEDIA_ROOT)
+    path('movie_scraping', views.run_webscraping_view, name='movie_scraping'),
+]

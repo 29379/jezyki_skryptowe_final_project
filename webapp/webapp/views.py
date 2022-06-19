@@ -1,13 +1,15 @@
 import json, sys, os
+from subprocess import run, PIPE
+from . import webscraping_script
 
-from django.views.generic import CreateView, UpdateView, ListView, DetailView, DeleteView
+from django.views.generic import UpdateView, ListView
 from .models import Data
-from django.http import HttpResponse, Http404
+from django.http import Http404
 from django.urls import reverse_lazy
 from pathlib import Path
 from django.shortcuts import render
-from django.db.models import Avg, Sum
-import logging
+from django.db.models import Avg
+
 
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
@@ -67,8 +69,11 @@ def movie_delete_view(request):
     return render(request, "data_delete.html")
 
 
+def run_webscraping_view(request, site):
+    out = run([sys.executable, webscraping_script, site], shell=False, stdout=PIPE)
+    print(out)
+    return render(request, "data_list.html")
+
+
 movie_list_view = MovieListView.as_view()
-#   movie_detail_view = MovieDetailView.as_view()
-#   movie_create_view = MovieCreateView.as_view()
 movie_update_view = MovieUpdateView.as_view()
-#   movie_delete_view = MovieDeleteView.as_view()
