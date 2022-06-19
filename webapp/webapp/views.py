@@ -6,31 +6,32 @@ from django.http import HttpResponse, Http404
 from django.urls import reverse_lazy
 from pathlib import Path
 from django.shortcuts import render
-from django.db.models import F
+from django.db.models import Avg, Sum
 
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
 imdb_file = os.path.join(PROJECT_DIR, 'webscraping/imdb.json')
 
 
-class MovieCreateView(CreateView):
-    model = Data
-    template_name = 'data_create.html'
-    fields = ['title', 'release_year', 'directors_and_actors',
-              'user_rating', 'poster']
-    success_url = reverse_lazy('movies')
-    context_object_name = 'movie'
+def movie_create_view(request):
     with open(imdb_file) as f:
         contents = json.load(f)
         for elem in contents:
             elem['release_year'] = elem['release_year'].strip('()')
             Data.objects.create(**elem)
+    #   Data.objects.values('title').annotate(total=Sum('user_rating')).values('title', 'user_rating', 'total')
+    #   'annotate' approach did not work as expected - usage of the for loop is slow, but effective
+    for row in Data.objects.all().reverse():
+        if Data.objects.filter(title=row.title).count() > 1:
+            row.delete()
+    return render(request, "data_create.html")
 
 
 class MovieListView(ListView):
     model = Data
     template_name = 'data_list.html'
     context_object_name = 'movies'
+    database_size = Data.objects.count()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -40,13 +41,10 @@ class MovieListView(ListView):
                 title__icontains=search_input
             )
         context['search_input'] = search_input
+        context['count'] = self.get_queryset().count()
         return context
 
 
-"""class MovieDetailView(DetailView):
-    model = Data
-    template_name = 'data_detail.html'
-    context_object_name = 'movie'"""
 def movie_detail_view(request, pk):
     movie = Data.objects.get(pk=pk)
     if movie is not None:
@@ -64,19 +62,13 @@ class MovieUpdateView(UpdateView):
     context_object_name = 'movie'
 
 
-class MovieDeleteView(DeleteView):
-    model = Data
-    template_name = 'data_delete.html'
-    context_object_name = 'movies'
-    success_url = reverse_lazy('movies')
-
-
-def test(request):
-    return HttpResponse('It works!')
+def movie_delete_view(request):
+    Data.objects.all().delete()
+    return render(request, "data_delete.html")
 
 
 movie_list_view = MovieListView.as_view()
 #   movie_detail_view = MovieDetailView.as_view()
-movie_create_view = MovieCreateView.as_view()
+#   movie_create_view = MovieCreateView.as_view()
 movie_update_view = MovieUpdateView.as_view()
-movie_delete_view = MovieDeleteView.as_view()
+#   movie_delete_view = MovieDeleteView.as_view()

@@ -5,9 +5,15 @@
     <h1>Movies</h1>
 </div>
 
+<div class="connections-wrapper">
+    <a href="{% url 'movie_create' %}">   Scrape data from "imdb.com"</a>
+    <a href="{% url 'movie_delete' %}">   Delete</a>
+    <text>Database size: {{count}}</text>
+    <p></p>
+</div>
 <div class="search-wrapper">
     <form method="GET">
-        <input type="text" name="search_area" value="{{search_input}}" size="65">
+        <input type="text" name="search_area" value="{{search_input}}" size="64">
         <input type="submit" value="Search">
     </form>
 </div>
@@ -21,7 +27,7 @@
         <td class="rating" align="left">{{movie.user_rating}}</td>
     </div>
     {% empty %}
-    <h3>The database is empty</h3>
+    <p>The database is empty</p>
     {% endfor %}
 </div>
 
