@@ -91,4 +91,3 @@ ITEM_PIPELINES = {
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 FEED_FORMAT = "json"
-FEED_URI = "imdb.json"
