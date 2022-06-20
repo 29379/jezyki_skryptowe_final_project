@@ -11,5 +11,7 @@ urlpatterns = [
     path('movie_create/', views.movie_create_view, name='movie_create'),
     path('movie_update/<int:pk>/', views.movie_update_view, name='movie_update'),
     path('movie_delete/', views.movie_delete_view, name='movie_delete'),
-    path('movie_scraping', views.run_webscraping_view, name='movie_scraping'),
+    path('movies_imdb/', views.scrape_imdb_view, name='imdb_scraping'),
+    path('movies_filmweb', views.scrape_filmweb_view, name='filmweb_scraping'),
+    path('movies_tomatoes', views.scrape_tomatoes_view, name='tomatoes_scraping'),
 ]

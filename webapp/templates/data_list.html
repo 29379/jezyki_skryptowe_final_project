@@ -5,13 +5,12 @@
     <h1>Movies</h1>
 </div>
 
-
-
 <div class="connections-wrapper">
-    <a href="{% url 'movie_create' %}">   Scrape data from "imdb.com"</a>
+    <a href="{% url 'movie_create' %}">   Load the database</a>
     <a href="{% url 'movie_delete' %}">   Delete</a>
-    <a href="{% url 'movie_create' %}">   Run script</a>
-    <text>Database size: {{count}}</text>
+    <p><a href="{% url 'imdb_scraping' %}">   Scrape data from "imdb.com"</a></p>
+    <p><a href="{% url 'filmweb_scraping' %}">   Scrape data from "filmweb.com"</a></p>
+    <p><a href="{% url 'tomatoes_scraping' %}">   Scrape data from "rottentomatoes.com"</a></p>
     <p></p>
 </div>
 
@@ -34,6 +33,7 @@
     {% empty %}
     <p>The database is empty</p>
     {% endfor %}
+    <p style="text-align: right;">Database size: {{count}}</p>
 </div>
 
 {% endblock content %}

@@ -1,6 +1,4 @@
-import json, sys, os
-from subprocess import run, PIPE
-from . import webscraping_script
+import json, os
 
 from django.views.generic import UpdateView, ListView
 from .models import Data
@@ -11,22 +9,51 @@ from django.shortcuts import render
 from django.db.models import Avg
 
 
-
 PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
 imdb_file = os.path.join(PROJECT_DIR, 'webscraping/imdb.json')
+filmweb_file = os.path.join(PROJECT_DIR, 'webscraping/filmweb.json')
+tomatoes_file = os.path.join(PROJECT_DIR, 'webscraping/tomatoes.json')
 
 
 def movie_create_view(request):
-    with open(imdb_file) as f:
+    try:
+        f = open(imdb_file)
         contents = json.load(f)
         for elem in contents:
             elem['release_year'] = elem['release_year'].strip('()')
             Data.objects.create(**elem)
-    #   Data.objects.values('title').annotate(total=Sum('user_rating')).values('title', 'user_rating', 'total')
-    for row in Data.objects.all().reverse():
-        if Data.objects.filter(title=row.title).count() > 1:
-            row.delete()
+        for row in Data.objects.all().reverse():
+            if Data.objects.filter(title=row.title).count() > 1:
+                row.delete()
+    except:
+        pass
+
+    try:
+        f = open(imdb_file)
+        contents = json.load(f)
+        for elem in contents:
+            elem['release_year'] = elem['release_year'].strip('()')
+            Data.objects.create(**elem)
+        for row in Data.objects.all().reverse():
+            if Data.objects.filter(title=row.title).count() > 1:
+                row.delete()
+    except:
+        pass
+
+    try:
+        f = open(imdb_file)
+        contents = json.load(f)
+        for elem in contents:
+            elem['release_year'] = elem['release_year'].strip('()')
+            Data.objects.create(**elem)
+        for row in Data.objects.all().reverse():
+            if Data.objects.filter(title=row.title).count() > 1:
+                row.delete()
+    except:
+        pass
+
     return render(request, "data_create.html")
+
 
 
 class MovieListView(ListView):
@@ -69,10 +96,19 @@ def movie_delete_view(request):
     return render(request, "data_delete.html")
 
 
-def run_webscraping_view(request, site):
-    out = run([sys.executable, webscraping_script, site], shell=False, stdout=PIPE)
-    print(out)
-    return render(request, "data_list.html")
+def scrape_imdb_view(request):
+    os.system(f'python /home/Kuba//Desktop/tmp/jezyki_skryptowe_final_project/imdb_scraping_script.py')
+    return render(request, "scraping_done_site.html")
+
+
+def scrape_filmweb_view(request):
+    os.system(f'python /home/Kuba//Desktop/tmp/jezyki_skryptowe_final_project/filmweb_scraping_script.py')
+    return render(request, "scraping_done_site.html")
+
+
+def scrape_tomatoes_view(request):
+    os.system(f'python /home/Kuba//Desktop/tmp/jezyki_skryptowe_final_project/tomatoes_scraping_script.py')
+    return render(request, "scraping_done_site.html")
 
 
 movie_list_view = MovieListView.as_view()
