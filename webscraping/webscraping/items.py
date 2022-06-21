@@ -7,9 +7,6 @@ import scrapy
 
 
 class MovieItem(scrapy.Item):
-    """Field objects define the metadata in one place,
-    without specifying types - dictionaries containing all
-    declared fields for this item"""
     title = scrapy.Field()
     release_year = scrapy.Field()
     directors_and_actors = scrapy.Field()

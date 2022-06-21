@@ -8,8 +8,6 @@
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 
-import sys, os
-
 BOT_NAME = 'webscraping'
 
 SPIDER_MODULES = ['webscraping.spiders']

@@ -4,7 +4,6 @@ from django.views.generic import UpdateView, ListView
 from matplotlib.pyplot import title
 from .models import Data
 from django.http import Http404
-from django.urls import reverse_lazy
 from pathlib import Path
 from django.shortcuts import render
 
@@ -72,15 +71,6 @@ def movie_detail_view(request, pk):
         return Http404("Image not found")
 
 
-class MovieUpdateView(UpdateView):
-    model = Data
-    template_name = 'data_update.html'
-    fields = ['title', 'release_year', 'directors_and_actors',
-              'user_rating', 'poster']
-    success_url = reverse_lazy('movies')
-    context_object_name = 'movie'
-
-
 def movie_delete_view(request):
     Data.objects.all().delete()
     return render(request, "data_delete.html")
@@ -97,4 +87,3 @@ def scrape_filmweb_view(request):
 
 
 movie_list_view = MovieListView.as_view()
-movie_update_view = MovieUpdateView.as_view()

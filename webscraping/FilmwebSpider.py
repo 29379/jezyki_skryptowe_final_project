@@ -10,7 +10,7 @@ if __name__ == '__main__':
         with open('filmweb.json', 'w') as f:
             movies = []
             page_num = 0
-            while page_num < 50:
+            while page_num < 30:
                 page_num += 1
                 url = base_url.format(page_num)
                 page = get(url)
