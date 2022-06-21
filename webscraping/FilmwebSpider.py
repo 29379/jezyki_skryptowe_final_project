@@ -5,7 +5,7 @@ from os.path import exists
 
 
 if __name__ == '__main__':
-    if not exists('/home/Kuba/Desktop/tmp/jezyki_skryptowe_final_project/webscraping/filmweb.json'):
+    if not exists('/filmweb.json'):
         base_url = "https://www.filmweb.pl/films/search?orderBy=popularity&descending=true&page={}"
         with open('filmweb.json', 'w') as f:
             movies = []

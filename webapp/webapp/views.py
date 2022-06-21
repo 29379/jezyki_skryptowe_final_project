@@ -1,7 +1,6 @@
 import json, os
 
-from django.views.generic import UpdateView, ListView
-from matplotlib.pyplot import title
+from django.views.generic import ListView
 from .models import Data
 from django.http import Http404
 from pathlib import Path
@@ -77,12 +76,16 @@ def movie_delete_view(request):
 
 
 def scrape_imdb_view(request):
-    os.system(f'python /home/Kuba//Desktop/tmp/jezyki_skryptowe_final_project/imdb_scraping_script.py')
+    os.system("cd ..")
+    os.system("cd ..")
+    os.system('python imdb_scraping_script.py')
     return render(request, "scraping_done_site.html")
 
 
 def scrape_filmweb_view(request):
-    os.system(f'python /home/Kuba//Desktop/tmp/jezyki_skryptowe_final_project/filmweb_scraping_script.py')
+    os.system("cd ..")
+    os.system("cd ..")
+    os.system('python filmweb_scraping_script.py')
     return render(request, "scraping_done_site.html")
 
 
