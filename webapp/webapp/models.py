@@ -3,11 +3,6 @@ from datetime import date, datetime
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-"""def upload_to(instance, file_name):
-    formatted_date = datetime.now().strftime("%d-%m-%Y")
-    return f"{formatted_date}/{file_name}"""
-
-
 class Data(models.Model):
     """Model used to store data, that my web-scraping spider collected"""
     title = models.CharField(max_length=100)

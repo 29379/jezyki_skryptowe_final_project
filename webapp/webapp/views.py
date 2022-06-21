@@ -12,7 +12,6 @@ from django.shortcuts import render
 PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
 imdb_file = os.path.join(PROJECT_DIR, 'webscraping/imdb.json')
 filmweb_file = os.path.join(PROJECT_DIR, 'webscraping/filmweb.json')
-tomatoes_file = os.path.join(PROJECT_DIR, 'webscraping/tomatoes.json')
 
 
 def movie_create_view(request):
@@ -30,17 +29,6 @@ def movie_create_view(request):
 
     try:
         f = open(imdb_file)
-        contents = json.load(f)
-        for elem in contents:
-            elem['release_year'] = elem['release_year'].strip('()')
-            Data.objects.create(**elem)
-    except FileNotFoundError:
-        pass
-    except IOError:
-        pass
-
-    try:
-        f = open(tomatoes_file)
         contents = json.load(f)
         for elem in contents:
             elem['release_year'] = elem['release_year'].strip('()')
@@ -105,11 +93,6 @@ def scrape_imdb_view(request):
 
 def scrape_filmweb_view(request):
     os.system(f'python /home/Kuba//Desktop/tmp/jezyki_skryptowe_final_project/filmweb_scraping_script.py')
-    return render(request, "scraping_done_site.html")
-
-
-def scrape_tomatoes_view(request):
-    os.system(f'python /home/Kuba//Desktop/tmp/jezyki_skryptowe_final_project/tomatoes_scraping_script.py')
     return render(request, "scraping_done_site.html")
 
 

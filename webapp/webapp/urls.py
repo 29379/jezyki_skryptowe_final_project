@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path
-#   from .settings import MEDIA_URL, MEDIA_ROOT
 from django.conf.urls.static import static
 from . import views
 
@@ -13,5 +12,4 @@ urlpatterns = [
     path('movie_delete/', views.movie_delete_view, name='movie_delete'),
     path('movies_imdb/', views.scrape_imdb_view, name='imdb_scraping'),
     path('movies_filmweb', views.scrape_filmweb_view, name='filmweb_scraping'),
-    path('movies_tomatoes', views.scrape_tomatoes_view, name='tomatoes_scraping'),
 ]
