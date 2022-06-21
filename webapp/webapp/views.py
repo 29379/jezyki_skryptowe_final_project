@@ -1,12 +1,12 @@
 import json, os
 
 from django.views.generic import UpdateView, ListView
+from matplotlib.pyplot import title
 from .models import Data
 from django.http import Http404
 from django.urls import reverse_lazy
 from pathlib import Path
 from django.shortcuts import render
-from django.db.models import Avg
 
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
@@ -17,15 +17,15 @@ tomatoes_file = os.path.join(PROJECT_DIR, 'webscraping/tomatoes.json')
 
 def movie_create_view(request):
     try:
-        f = open(imdb_file)
+        f = open(filmweb_file)
         contents = json.load(f)
         for elem in contents:
             elem['release_year'] = elem['release_year'].strip('()')
+            elem['title'] = elem['title'].rstrip()
             Data.objects.create(**elem)
-        for row in Data.objects.all().reverse():
-            if Data.objects.filter(title=row.title).count() > 1:
-                row.delete()
-    except:
+    except FileNotFoundError:
+        pass
+    except IOError:
         pass
 
     try:
@@ -34,24 +34,26 @@ def movie_create_view(request):
         for elem in contents:
             elem['release_year'] = elem['release_year'].strip('()')
             Data.objects.create(**elem)
-        for row in Data.objects.all().reverse():
-            if Data.objects.filter(title=row.title).count() > 1:
-                row.delete()
-    except:
+    except FileNotFoundError:
+        pass
+    except IOError:
         pass
 
     try:
-        f = open(imdb_file)
+        f = open(tomatoes_file)
         contents = json.load(f)
         for elem in contents:
             elem['release_year'] = elem['release_year'].strip('()')
             Data.objects.create(**elem)
-        for row in Data.objects.all().reverse():
-            if Data.objects.filter(title=row.title).count() > 1:
-                row.delete()
-    except:
+    except FileNotFoundError:
+        pass
+    except IOError:
         pass
 
+    for row in Data.objects.all():
+            if Data.objects.filter(title=row.title).count() > 1:
+                row.delete()
+        
     return render(request, "data_create.html")
 
 

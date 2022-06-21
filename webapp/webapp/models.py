@@ -25,3 +25,6 @@ class Data(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+    class Meta:
+        ordering = ['-user_rating', 'title']

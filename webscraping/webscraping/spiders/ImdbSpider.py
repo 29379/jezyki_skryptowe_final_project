@@ -7,11 +7,6 @@ class IMDBspider(scrapy.Spider):
     start_urls = ["https://www.imdb.com/chart/top/?ref_=nv_mv_250"]
 
     def parse(self, response, **kwargs):
-        """Simple parsing function"""
-        #   'yield' is used like 'return', but the function returns a GENERATOR
-        #   which are iterators you can only iterate over once, that do not store
-        #   values in memory, but generate them on the fly
-        #   'yield' is most commonly used in scrapy instead of 'return'
         i = -1
         for film in response.css("tr"):
             year = film.css("span.secondaryInfo::text").get()
